@@ -3,10 +3,7 @@ package com.learn.ecommerce.controller;
 import com.learn.ecommerce.model.Product;
 import com.learn.ecommerce.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,22 @@ public class ProductController {
     @GetMapping("{/id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        Product created = productService.createProduct(product);
+        return ResponseEntity.ok(created);
+    }
+
+    @PutMapping("{/id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return ResponseEntity.ok(productService.updateProduct(product));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return ResponseEntity.noContent().build();
     }
 }
