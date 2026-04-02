@@ -5,6 +5,7 @@ import com.learn.ecommerce.repository.ProductRepository;
 
 import java.util.List;
 
+@Service
 public class ProductService {
 
     private final ProductRepository productRepository;
