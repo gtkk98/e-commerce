@@ -2,6 +2,7 @@ package com.learn.ecommerce.service;
 
 import com.learn.ecommerce.model.Product;
 import com.learn.ecommerce.repository.ProductRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -27,8 +28,13 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public  Product updateProduct(Product product) {
-        return productRepository.save(product);
+    public  Product updateProduct(Long id, Product updated) {
+        Product existing = getProductById(id);
+        existing.setName(updated.getName());
+        existing.setDescription(updated.getDescription());
+        existing.setPrice(updated.getPrice());
+        existing.setCategory(updated.getCategory());
+        return productRepository.save(existing);
     }
 
     public void deleteProductById(Long id) {
